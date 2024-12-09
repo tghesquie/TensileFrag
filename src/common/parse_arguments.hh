@@ -1,8 +1,9 @@
 #ifndef PARSE_ARGUMENTS_HPP
 #define PARSE_ARGUMENTS_HPP
 
-#include "argparse.hh"
+#include "argparse/argparse.hpp"
 #include <string>
+#include <memory>
 
 struct SimulationArguments {
     std::string material_file;
@@ -10,7 +11,8 @@ struct SimulationArguments {
     double safety_factor;
     double strain_rate;
     bool damp_velocities;
-}
+    bool contact;
+};
 
 class ParseArguments {
 public:
@@ -20,26 +22,32 @@ public:
 
 protected:
     // Helper function
-    argparse::ArgumentParser getDefaultParser(const std::string& description) const {
-        argparse::ArgumentParser parser(description);
+    std::unique_ptr<argparse::ArgumentParser> getDefaultParser(const std::string& description) const {
+        auto parser = std::make_unique<argparse::ArgumentParser>(description);
 
         // Add mandatory arguments
-        parser.addArgument("--material_file", "-mat")
+        parser->add_argument("--material_file", "-mat")
             .required()
             .help("Name of the material file (mandatory)");
 
-        parser.addArgument("--mesh_file", "-msh")
+        parser->add_argument("--mesh_file", "-msh")
             .required()
             .help("Name of the mesh file (mandatory)");
 
         // Add optional arguments
-        parser.addArgument("--safety_factor", "-sf")
+        parser->add_argument("--safety_factor", "-sf")
             .default_value(0.2)
-            .scan<"g", double>();
+            .scan<'g', double>();
 
-        parser.addArgument("--damp_velocities", "-dv")
+        parser->add_argument("--damp_velocities", "-dv")
             .default_value(false)
             .implicit_value(true)
             .help("Damp velocities (default: false)");
 
+        return parser;
+
+    }
 };
+
+
+#endif // PARSE_ARGUMENTS_HPP
