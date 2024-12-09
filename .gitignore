@@ -42,3 +42,6 @@ Makefile
 
 # VS Code
 .vscode/
+
+# Mesh files
+*.msh
