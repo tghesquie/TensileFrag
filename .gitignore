@@ -30,3 +30,15 @@
 *.exe
 *.out
 *.app
+
+# Ignore build directories
+build/
+CMakeFiles/
+CMakeCache.txt
+
+# Ignore Makefiles
+Makefile
+*.make
+
+# VS Code
+.vscode/
