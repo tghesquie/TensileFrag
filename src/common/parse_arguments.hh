@@ -35,6 +35,11 @@ protected:
         // Add optional arguments
         parser.addArgument("--safety_factor", "-sf")
             .default_value(0.2)
-            .scan<"g", double>()
+            .scan<"g", double>();
+
+        parser.addArgument("--damp_velocities", "-dv")
+            .default_value(false)
+            .implicit_value(true)
+            .help("Damp velocities (default: false)");
 
 };
