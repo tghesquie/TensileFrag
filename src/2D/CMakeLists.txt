@@ -1,0 +1,1 @@
+add_akantu_simulation(main2D main.cc)
