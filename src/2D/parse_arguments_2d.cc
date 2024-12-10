@@ -20,8 +20,8 @@ SimulationArguments ParseArguments2D::parse(int argc, char** argv) {
     std::string mesh_file = parser->get<std::string>("--mesh_file");
 
     // Add base paths for 2D
-    std::string base_material_path = "2D/material/";
-    std::string base_mesh_path = "2D/mesh/";
+    std::string base_material_path = "../inputs/2D/material/";
+    std::string base_mesh_path = "../inputs/2D/mesh/";
 
     args.material_file = std::filesystem::path(base_material_path) / material_file;
     args.mesh_file = std::filesystem::path(base_mesh_path) / mesh_file;
