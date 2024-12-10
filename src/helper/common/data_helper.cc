@@ -29,7 +29,7 @@ void DataHelper::saveCS(const std::vector<double>& sigma_c, const std::string& m
 
 /*---------------------------------------------------------------------------*/
 
-void DataHelper::loadCS(const std::string& material_file, const std::string& mesh_file) {
+std::vector<double> DataHelper::loadCS(const std::string& material_file, const std::string& mesh_file) {
     std::string path = getCSPath(material_file, mesh_file);
     std::ifstream in_file(path);
     if (!in_file.is_open()) {

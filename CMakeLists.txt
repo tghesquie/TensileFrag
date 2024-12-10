@@ -6,4 +6,3 @@ find_package(Boost REQUIRED COMPONENTS graph)
 
 add_subdirectory(src)
 
-include_directories(${CMAKE_SOURCE_DIR}/libs/argparse/include)

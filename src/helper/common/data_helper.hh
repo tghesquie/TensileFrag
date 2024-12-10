@@ -10,7 +10,7 @@
 
 class DataHelper {
 public:
-    explicit DataHelper(const std::string& basePath) : basePath(basePath) {}
+    explicit DataHelper(const std::string& basePath) : base_path(base_path) {}
 
     void saveCS(const std::vector<double>& sigma_c, const std::string& material_file, const std::string& mesh_file);
     std::vector<double> loadCS(const std::string& material_file, const std::string& mesh_file);
