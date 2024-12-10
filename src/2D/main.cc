@@ -2,16 +2,25 @@
 #include "parse_arguments_2d.hh"
 #include <iostream>
 
+
+using namespace akantu;
+
+
 int main(int argc, char** argv) {
+    // Parse arguments
     ParseArguments2D parser;
     auto args = parser.parse(argc, argv);
 
-    std::cout << "Material file: " << args.material_file << std::endl;
-    std::cout << "Mesh file: " << args.mesh_file << std::endl;
-    std::cout << "Safety factor: " << args.safety_factor << std::endl;
-    std::cout << "Strain rate: " << args.strain_rate << std::endl;
-    std::cout << "Damp velocities: " << args.damp_velocities << std::endl;
-    std::cout << "Contact: " << args.contact << std::endl;
+    // Initialize material, mesh and model
+    const Int dim = 2;
+    initialize(args.material_file, argc, argv);
 
+    Mesh mesh(dim);
+    mesh.read(args.mesh_file);
+
+    SolidMechanicsModelCohesive model(mesh);
+    model.initFull(_analysis_method = _explicit_lumped_mass, _is_extrinsic = true);
+
+    
     return 0;
 };
